@@ -8,7 +8,7 @@ jobs:
     steps:
       - id: Step1
         name: Step1 in My experiment job1
-        run: echo ${{ toJson(github.event) }}
+        run: echo '${{ toJson(github.event) }}'
       - id: Step2
         name: Step2 in My experiment job1
         run: echo "Step2 in My experiment job1"
