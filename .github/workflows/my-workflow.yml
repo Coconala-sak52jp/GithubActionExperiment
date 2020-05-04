@@ -8,7 +8,7 @@ jobs:
     steps:
       - id: Step1
         name: Display issues
-        run: echo '${{ toJson(github.event.issues) }}'
+        run: echo '${{ toJson(github.event.issue) }}'
       - id: Step2
         name: Display issues_comment
         run: echo '${{ toJson(github.event.issues_comment) }}'
