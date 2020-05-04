@@ -1,0 +1,18 @@
+# todoist api token:00e7030e78acb502ff95c20fc377465aa70cda36
+# Slack
+#  API:https://hooks.slack.com/services/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
+#
+
+name: Slack notification experiment
+on: push
+
+jobs:
+  slackNotification:
+    name: Slack Notification
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2.0.0
+      env:
+        SLACK_WEBHOOK: https://hooks.slack.com/services/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
