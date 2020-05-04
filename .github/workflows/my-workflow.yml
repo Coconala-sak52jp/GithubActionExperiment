@@ -1,5 +1,5 @@
 name: My experimental workflow
-on: [issues,issue_comment]
+on: [issues,issue_comment,gollum]
 
 jobs:
   job1:
