@@ -3,6 +3,7 @@
 #  API:https://hooks.slack.com/services/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
 # https://hooks.slack.com/services/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
 # https://hooks.slack.com/services/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
+# https://hooks.slack.com/services/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
 
 name: Slack notification experiment
 on: push
@@ -16,6 +17,6 @@ jobs:
     - name: Slack Notification
       uses: rtCamp/action-slack-notify@v2.0.0
       env:
-        SLACK_CHANNEL: \#github-actions-experiment
-        SLACK_WEBHOOK: https://hooks.slack.com/services/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
+        SLACK_CHANNEL: github-actions-experiment
+        SLACK_WEBHOOK: https://hooks.slack.com/services/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
         
