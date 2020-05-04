@@ -1,5 +1,5 @@
 name: My experimental workflow
-on: [push,issues,issue_comment]
+on: [issues,issue_comment]
 
 jobs:
   job1:
@@ -12,6 +12,9 @@ jobs:
       - id: Step2
         name: Display issues_comment
         run: echo '${{ toJson(github.event.issues_comment) }}'
+      - id: Step3
+        name: Display all events
+        run: echo '${{ toJson(github.event) }}'
   job2:
     name: My experiment job 2
     runs-on: ubuntu-latest
