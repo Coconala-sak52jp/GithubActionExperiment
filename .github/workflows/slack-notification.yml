@@ -1,15 +1,32 @@
 name: Slack notification experiment
-on: [issues,issue_comment]
+on: [issues,issue_comment,gollum]
 
 jobs:
-  slackNotification:
-    name: Slack Notification
+  # -- on: issues --
+  notifyIssue:
+    name: Notification of issue to Slack
     runs-on: ubuntu-latest
+    if: ${{(github.event.issue != null) && (github.event.comment == null)}}
     steps:
-    - uses: actions/checkout@v2
-    - name: Slack Notification
+    - name: Checkout  
+      uses: actions/checkout@v2
+      # -- action == open --
+    - name: action is open
+      if: ${{github.event.action == 'opened'}}
       uses: rtCamp/action-slack-notify@v2.0.0
       env:
         SLACK_CHANNEL: github-actions-experiment
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_TITLE: Issue:Opend
+        SLACK_MESSAGE: ${{github.event.issue.title}}
+      # -- action == edited --
+    - name: action is edited
+      if: ${{github.event.action == 'edited'}}
+      uses: rtCamp/action-slack-notify@v2.0.0
+      env:
+        SLACK_CHANNEL: github-actions-experiment
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_TITLE: Issue:Edited
+        SLACK_MESSAGE: ${{github.event.issue.title}}
+          
         
