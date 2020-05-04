@@ -1,0 +1,30 @@
+# todoist api token:00e7030e78acb502ff95c20fc377465aa70cda36
+# Slack
+#  API:https://hooks.slack.com/services/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
+#
+
+name: My experimental workflow
+on: push
+
+jobs:
+  job1:
+    name: My experiment job 1
+    runs-on: ubuntu-latest
+    steps:
+      - id: Step1
+        name: Step1 in My experiment job1
+        run: echo "Step1 in My experiment job1"
+      - id: Step2
+        name: Step2 in My experiment job1
+        run: echo "Step2 in My experiment job1"
+  job2:
+    name: My experiment job 2
+    runs-on: ubuntu-latest
+    steps:
+      - id: Step1
+        name: Step1 in My experiment job2
+        run: echo "Step1 in My experiment job2"
+      - id: Step2
+        name: Step2 in My experiment job2
+        run: echo "Step2 in My experiment job2"
+
