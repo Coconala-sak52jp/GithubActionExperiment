@@ -1,10 +1,3 @@
-# todoist api token:00e7030e78acb502ff95c20fc377465aa70cda36
-# Slack
-#  API:https://hooks.slack.com/services/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
-# https://hooks.slack.com/services/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
-# https://hooks.slack.com/services/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
-# https://hooks.slack.com/services/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
-
 name: Slack notification experiment
 on: push
 
