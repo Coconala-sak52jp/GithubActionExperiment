@@ -18,5 +18,5 @@ jobs:
       uses: rtCamp/action-slack-notify@v2.0.0
       env:
         SLACK_CHANNEL: github-actions-experiment
-        SLACK_WEBHOOK: https://hooks.slack.com/services/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
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         

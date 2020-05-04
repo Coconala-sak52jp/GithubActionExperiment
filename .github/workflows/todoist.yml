@@ -15,6 +15,6 @@ jobs:
     steps:
       - uses: Port2/todoist-task@v0.3
         with:
-          token: 00e7030e78acb502ff95c20fc377465aa70cda36
+          token: ${{ secrets.TODOIST_TOKEN }}
           task: "Test and release"
         
