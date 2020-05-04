@@ -1,5 +1,5 @@
 name: todoist experiment
-on: push
+on: [push,issues,issue_comment]
 
 jobs:
   todoistNotification:
