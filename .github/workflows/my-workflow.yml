@@ -2,27 +2,56 @@ name: My experimental workflow
 on: [issues,issue_comment,gollum]
 
 jobs:
-  job1:
-    name: My experiment job 1
+  one:
     runs-on: ubuntu-latest
     steps:
-      - id: Step1
-        name: Display issues
-        run: echo '${{ toJson(github.event.issue) }}'
-      - id: Step2
-        name: Display issues_comment
-        run: echo '${{ toJson(github.event.issues_comment) }}'
-      - id: Step3
-        name: Display all events
-        run: echo '${{ toJson(github.event) }}'
-  job2:
-    name: My experiment job 2
-    runs-on: ubuntu-latest
-    steps:
-      - id: Step1
-        name: Step1 in My experiment job2
-        run: echo "Step1 in My experiment job2"
-      - id: Step2
-        name: Step2 in My experiment job2
-        run: echo "Step2 in My experiment job2"
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
+
+# jobs:
+#   job1:
+#     name: My experiment job 1
+#     runs-on: ubuntu-latest
+#     steps:
+#       - id: Step1
+#         name: Display issues
+#         run: echo '${{ toJson(github.event.issue) }}'
+#       - id: Step2
+#         name: Display issues_comment
+#         run: echo '${{ toJson(github.event.issues_comment) }}'
+#       - id: Step3
+#         name: Display all events
+#         run: echo '${{ toJson(github.event) }}'
+#   job2:
+#     name: My experiment job 2
+#     runs-on: ubuntu-latest
+#     steps:
+#       - id: Step1
+#         name: Step1 in My experiment job2
+#         run: echo "Step1 in My experiment job2"
+#       - id: Step2
+#         name: Step2 in My experiment job2
+#         run: echo "Step2 in My experiment job2"
 
