@@ -4,14 +4,14 @@ on: [issues,issue_comment,gollum]
 jobs:
   # -- on: issues --
   notifyIssue:
-    name: Notification of issue to Slack
+    name: Notify issue-event to Slack
     runs-on: ubuntu-latest
-    if: ${{(github.event.issue != null) && (github.event.comment == null)}}
+    if: ${{github.event_name == 'issues'}}
     steps:
     - name: Checkout  
       uses: actions/checkout@v2
-      # -- action == open --
-    - name: action is open
+    # -- action == open --
+    - name: If action is open
       if: ${{github.event.action == 'opened'}}
       uses: rtCamp/action-slack-notify@v2.0.0
       env:
@@ -19,14 +19,112 @@ jobs:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_TITLE: Issue:Opend
         SLACK_MESSAGE: ${{github.event.issue.title}}
-      # -- action == edited --
-    - name: action is edited
+    # -- action == reopen --
+    - name: If action is reopen
+      if: ${{github.event.action == 'reopened'}}
+      uses: rtCamp/action-slack-notify@v2.0.0
+      env:
+        SLACK_CHANNEL: github-actions-experiment
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_TITLE: Issue:Reopend
+        SLACK_MESSAGE: ${{github.event.issue.title}}
+    # -- action == close --
+    - name: If action is close
+      if: ${{github.event.action == 'closed'}}
+      uses: rtCamp/action-slack-notify@v2.0.0
+      env:
+        SLACK_CHANNEL: github-actions-experiment
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_TITLE: Issue:Closed
+        SLACK_MESSAGE: ${{github.event.issue.title}}
+    # -- action == edited and target == body --
+    - name: If action is editing body
+      if: ${{(github.event.action == 'edited') && (github.event.changes.body != null)}}
+      uses: rtCamp/action-slack-notify@v2.0.0
+      env:
+        SLACK_CHANNEL: github-actions-experiment
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_TITLE: Issue:Edited:body
+        SLACK_MESSAGE: ${{github.event.issue.title}}
+    # -- action == edited and target == title --
+    - name: action is editing title
+      if: ${{(github.event.action == 'edited') && (github.event.changes.title != null)}}
+      uses: rtCamp/action-slack-notify@v2.0.0
+      env:
+        SLACK_CHANNEL: github-actions-experiment
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_TITLE: Issue:Edited:title
+        SLACK_MESSAGE: ${{github.event.issue.title}}
+    # -- action == assigned --
+    - name: If action is assign
+      if: ${{github.event.action == 'assigned'}}
+      uses: rtCamp/action-slack-notify@v2.0.0
+      env:
+        SLACK_CHANNEL: github-actions-experiment
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_TITLE: Issue:Assigned
+        SLACK_MESSAGE: ${{github.event.issue.title}}
+        
+  # -- on: issue-comment --
+  notifyIssueComment:
+    name: Notify issue-comment-event to Slack
+    runs-on: ubuntu-latest
+    if: ${{github.event_name == 'issue_comment'}}
+    steps:
+    - name: Checkout  
+      uses: actions/checkout@v2
+    # -- action == created --
+    - name: If action is created
+      if: ${{github.event.action == 'created'}}
+      uses: rtCamp/action-slack-notify@v2.0.0
+      env:
+        SLACK_CHANNEL: github-actions-experiment
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_TITLE: Issue:comment:Created
+        SLACK_MESSAGE: ${{github.event.issue.title}}
+    # -- action == deleted --
+    - name: If action is deleted
+      if: ${{github.event.action == 'deleted'}}
+      uses: rtCamp/action-slack-notify@v2.0.0
+      env:
+        SLACK_CHANNEL: github-actions-experiment
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_TITLE: Issue:comment:Deleted
+        SLACK_MESSAGE: ${{github.event.issue.title}}
+    # -- action == edited --
+    - name: If action is edited
       if: ${{github.event.action == 'edited'}}
       uses: rtCamp/action-slack-notify@v2.0.0
       env:
         SLACK_CHANNEL: github-actions-experiment
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        SLACK_TITLE: Issue:Edited
+        SLACK_TITLE: Issue:comment:Edited
         SLACK_MESSAGE: ${{github.event.issue.title}}
-          
+        
+  # -- on: gollum
+  notifyGollum:
+    name: Notify gollum-event(wiki-related) to Slack
+    runs-on: ubuntu-latest
+    if: ${{github.event_name == 'gollum'}}
+    steps:
+    - name: Checkout  
+      uses: actions/checkout@v2
+    # -- pages.action == created --
+    - name: If action is created
+      if: ${{github.event.pages.action == 'created'}}
+      uses: rtCamp/action-slack-notify@v2.0.0
+      env:
+        SLACK_CHANNEL: github-actions-experiment
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_TITLE: Wiki:Created
+        SLACK_MESSAGE: ${{github.event.pages.title}}
+    # -- pages.action == edited --
+    - name: If action is edited
+      if: ${{github.event.pages.action == 'edited'}}
+      uses: rtCamp/action-slack-notify@v2.0.0
+      env:
+        SLACK_CHANNEL: github-actions-experiment
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_TITLE: Wiki:Edited
+        SLACK_MESSAGE: ${{github.event.pages.title}}
         
