@@ -37,7 +37,7 @@ my-workflow.yml.bakは、開発用に用いたworkflowのバックアップで�
 	＊＊ generalは接続時のパーミッションで跳ねられることがあるため注意 ＊＊
 7. github-reposで新しいissueをopenしてみて、下記のような通知がslackに届けば成功。
 
-![enter image description here](https://photos.app.goo.gl/5jnriYLHG7amAp1TA)
+![slack通知表示例](https://user-images.githubusercontent.com/16172761/81192944-c69a9380-8ff5-11ea-814d-a9e1a93f2468.png)
 
 ### issue更新仕様
 githubのissueユースケース視点における通知のサポート範囲は、下記の通りです。
