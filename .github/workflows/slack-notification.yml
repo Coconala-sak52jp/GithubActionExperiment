@@ -117,7 +117,7 @@ jobs:
         SLACK_CHANNEL: github-actions-experiment
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_TITLE: Wiki:Created
-        SLACK_MESSAGE: ${{github.event.pages.title}}
+        SLACK_MESSAGE: ${{github.event.pages[0].title}}
     # -- pages.action == edited --
     - name: If action is edited
       if: ${{github.event.pages[0].action == 'edited'}}
@@ -126,5 +126,5 @@ jobs:
         SLACK_CHANNEL: github-actions-experiment
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_TITLE: Wiki:Edited
-        SLACK_MESSAGE: ${{github.event.pages.title}}
+        SLACK_MESSAGE: ${{github.event.pages[0].title}}
         
