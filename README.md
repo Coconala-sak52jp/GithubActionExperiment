@@ -122,6 +122,8 @@ wiki更新に関し、ユースケース視点での通知サポート範囲は�
    2. 'Add a new secret'をポイントし、`Name:TODOIST_TOKEN`、`Value:APIトークン（手順４．で記録したもの）`を設定する。
 3. github-reposで新しいissueをopenしてみて、下記のような通知がtodoistに届けば成功。
 
+![fig2](https://user-images.githubusercontent.com/16172761/81194553-c00d1b80-8ff7-11ea-96a8-a0d5246741e9.png)
+
 
 ### issue更新仕様
 githubのissueユースケース視点における通知のサポート範囲は、下記の通りです。
