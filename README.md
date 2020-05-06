@@ -24,6 +24,8 @@ my-workflow.yml.bakは、開発用に用いたworkflowのバックアップで�
 `slack-notification.yml`及び`todoist-notification.yml`の動作テスト結果です。
 
 ## Slackへの通知
+本workflowでは[Slack Notify - GitHub Action](https://github.com/marketplace/actions/slack-notify)を用いています。
+
 ### Quick Start
 1. 対象とするgithubリポジトリ（以降、github-reposと呼ぶ）に`.github/workflows`（以降wfディレクトリと呼ぶ）を準備する。
 2. wfディレクトリに`slack-notification.yml`を配置する。
@@ -109,6 +111,8 @@ wiki更新に関し、ユースケース視点での通知サポート範囲は�
 それ以外の変数はその目的を逸しない限り特に制約はないので、自由に設定することが出来ます。詳細は、[Slack Notify - GitHub Action](https://github.com/marketplace/actions/slack-notify#environment-variables)をご参照願います。
 
 ## todoistへの通知
+本workflowでは[Add Todoist Task](https://github.com/marketplace/actions/add-todoist-task)を用いています。
+
 ### Quick Start
 1. 対象とするgithubリポジトリ（以降、github-reposと呼ぶ）に`.github/workflows`（以降wfディレクトリと呼ぶ）を準備する。
 2. wfディレクトリに`todoist-notification.yml`を配置する。
