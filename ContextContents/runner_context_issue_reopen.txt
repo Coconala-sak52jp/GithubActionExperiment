@@ -1,0 +1,6 @@
+ {
+   "os": "Linux",
+   "tool_cache": "/opt/hostedtoolcache",
+   "temp": "/home/runner/work/_temp",
+   "workspace": "/home/runner/work/GithubActionExperiment"
+ }
