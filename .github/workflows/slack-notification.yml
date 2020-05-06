@@ -111,7 +111,7 @@ jobs:
       uses: actions/checkout@v2
     # -- pages.action == created --
     - name: If action is created
-      if: ${{github.event.pages.action == 'created'}}
+      if: ${{github.event.pages[0].action == 'created'}}
       uses: rtCamp/action-slack-notify@v2.0.0
       env:
         SLACK_CHANNEL: github-actions-experiment
@@ -120,7 +120,7 @@ jobs:
         SLACK_MESSAGE: ${{github.event.pages.title}}
     # -- pages.action == edited --
     - name: If action is edited
-      if: ${{github.event.pages.action == 'edited'}}
+      if: ${{github.event.pages[0].action == 'edited'}}
       uses: rtCamp/action-slack-notify@v2.0.0
       env:
         SLACK_CHANNEL: github-actions-experiment
