@@ -1,0 +1,16 @@
+name: todoist experiment
+on: issues
+
+jobs:
+  # -- on: issues --
+  nootifyIssue:
+    name: Notify issue-event to todoist
+    runs-on: ubuntu-latest
+    steps:
+      - name: If action is open
+        if: ${{github.event.action == 'opened'}}
+        uses: Port2/todoist-task@v0.3
+        with:
+          token: ${{secrets.TODOIST_TOKEN}}
+          task: ${{github.event.issue.title}}
+        
