@@ -1,4 +1,4 @@
-name: todoist experiment
+name: todoist notification action
 on: issues
 
 jobs:

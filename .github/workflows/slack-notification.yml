@@ -1,4 +1,4 @@
-name: Slack notification experiment
+name: Slack notification action
 on: [issues,issue_comment,gollum]
 
 jobs:
@@ -47,7 +47,7 @@ jobs:
         SLACK_TITLE: Issue:Edited:body
         SLACK_MESSAGE: ${{github.event.issue.title}}
     # -- action == edited and target == title --
-    - name: action is editing title
+    - name: If action is editing title
       if: ${{(github.event.action == 'edited') && (github.event.changes.title != null)}}
       uses: rtCamp/action-slack-notify@v2.0.0
       env:
