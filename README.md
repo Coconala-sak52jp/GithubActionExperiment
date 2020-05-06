@@ -1,4 +1,27 @@
+
 # github actionsを用いてissue/wiki更新をSlackとtodoistへ通知する
+
+## リリースパッケージの構成
+ツリー構成を下記に示します。
+
+```
+GithubActionExperiment
+|-- .github
+|   `-- workflows
+|       |-- todoist-notification.yml
+|       |-- slack-notification.yml
+|       `-- my-workflow.yml.bak
+|-- CheckList.xlsx
+|-- QA.txt
+`-- README.md
+```
+
+主なコンテンツについて説明します。
+### workflow
+`.github/workflows`には、slack通知及びtosoist通知に用いる`slack-notification.yml`及び`todoist-notification.yml`があり、これらに関しては後述します。  
+my-workflow.yml.bakは、開発用に用いたworkflowのバックアップであり、参考資料として入れてあります。githubのactionとworkflowで参照出来る*Context Information*を収集する機能を持っており、workflowの機能を拡張する際に、どのような情報を用いるべきか判断する等の目的で使用できます。
+### CheckList.xlsx
+`slack-notification.yml`及び`todoist-notification.yml`の動作テスト結果です。
 
 ## Slackへの通知
 ### Quick Start
@@ -56,12 +79,58 @@ issue本体と同様にユースケース視点から見た通知のサポート
 
 ### wiki更新仕様
 wiki更新に関し、ユースケース視点での通知サポート範囲は下記の通りです。
-+ aaa
++ 新規ページの作成
++ 既存ページの編集
+
+それぞれの事象に対する通知内容は下表の通りです。
+
+|ユースケース |タイトル欄の内容  |メッセージ欄の内容|
+|--|--|--|
+| 新規ページの作成 |Wiki:Created  |ページのタイトル  |
+| 既存ページの編集 |Wiki:Edited  |ページのタイトル |
+
+
 
 ### カスタマイズ
+`slack-notification.yml`においてカスタマイズが必須または可能な箇所は、`env:`のみです。
+
+```
+    # -- action == open --
+    - name: If action is open
+      if: ${{github.event.action == 'opened'}}
+      uses: rtCamp/action-slack-notify@v2.0.0
+      env:
+        SLACK_CHANNEL: github-actions-experiment
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_TITLE: Issue:Opened
+        SLACK_MESSAGE: ${{github.event.issue.title}}
+```
+上記は一例として、issueイベントのOpen actionが発生した時のslack通知設定を示しています。上記においてカスタマイズが必須なのは`SLACK_CHANNEL`であり、Quick Startで説明した通り、通知の宛先となるSlackのチャンネルを指定する必要があります。一方、`SLACK_WEBHOOK`は基本的に変更禁止です（github-reposに設定するsecretのNameを、`SLACK_WEBHOOK`以外に変更した場合を除く）。  
+それ以外の変数はその目的を逸しない限り特に制約はないので、自由に設定することが出来ます。詳細は、[Slack Notify - GitHub Action](https://github.com/marketplace/actions/slack-notify#environment-variables)をご参照願います。
 
 ## todoistへの通知
+### Quick Start
+1. 対象とするgithubリポジトリ（以降、github-reposと呼ぶ）に`.github/workflows`（以降wfディレクトリと呼ぶ）を準備する。
+2. wfディレクトリに`todoist-notification.yml`を配置する。
+3. 宛先となるtodoistのプロジェクト（以降、todo-prjと呼ぶ）を用意する。
+4. todo-prjのAPIトークンを下記のように取得する。
+   1. todo-prjのフロントページで「歯車アイコン→設定」を選ぶ
+   2. 左側のメニューペインから「連携機能」を選ぶ
+   3. 最下部のAPIトークンを記録する
+5. 再びgithub-reposへ戻り、シークレット変数を登録する。
+   1. 'Settings->Secret'をポイントする。
+   2. 'Add a new secret'をポイントし、`Name:TODOIST_TOKEN`、`Value:APIトークン（手順４．で記録したもの）`を設定する。
+3. github-reposで新しいissueをopenしてみて、下記のような通知がtodoistに届けば成功。
 
 
-> Written with [StackEdit](https://stackedit.io/).
+### issue更新仕様
+githubのissueユースケース視点における通知のサポート範囲は、下記の通りです。
++ 新規issueのopen (New issue)
+
+> 理想的にはgithub-repos上で行われるissueのオペレーションに同期して、todoistのタスクの状態が更新されていくべきですが、現在手に入るgithub actionsのリソースには、このような機能を提供するものは残念ながら存在しないようです。   
+
+通知は、todo-prjのインボックスに入ります。githiub-reposで作成したissueのタイトルが、そのままtodo-prjのタスク名になります。
+
+### カスタマイズ
+todoist通知仕様にはカスタマイズできる部分はありません。
 
