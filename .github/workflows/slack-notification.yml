@@ -17,7 +17,7 @@ jobs:
       env:
         SLACK_CHANNEL: github-actions-experiment
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        SLACK_TITLE: Issue:Opend
+        SLACK_TITLE: Issue:Opened
         SLACK_MESSAGE: ${{github.event.issue.title}}
     # -- action == reopen --
     - name: If action is reopen
@@ -26,7 +26,7 @@ jobs:
       env:
         SLACK_CHANNEL: github-actions-experiment
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        SLACK_TITLE: Issue:Reopend
+        SLACK_TITLE: Issue:Reopened
         SLACK_MESSAGE: ${{github.event.issue.title}}
     # -- action == close --
     - name: If action is close
