@@ -9,8 +9,8 @@
 5. 再びgithub-reposへ戻り、シークレット変数を登録する。
 	1. 'Settings->Secret'をポイントする。
 	2. 'Add a new secret'をポイントし、`Name:SLACK_WEBHOOK`、`Value:Webhook URL（手順４．で記録したもの）`を設定する。
-6.  `github-repos/.github/workflows/slack-notification.yml`を編集し、`SLACK_CHANNEL: github-actions-experiment`に、4. で設定したものと同じチャンネルを設定する。
-	e.g.) `SLACK_CHANNEL: my-favorite-chnnel`
+6.  `github-repos/.github/workflows/slack-notification.yml`を編集し、`SLACK_CHANNEL: github-actions-experiment`に、4. で設定したものと同じチャンネルを設定する。    
+	e.g.) `SLACK_CHANNEL: my-favorite-chnnel`   
 	＊＊ generalは接続時のパーミッションで跳ねられることがあるため注意 ＊＊
 7. github-reposで新しいissueをopenしてみて、下記のような通知がslackに届けば成功。
 
@@ -38,6 +38,7 @@ githubのissueユースケース視点における通知のサポート範囲は
 | issueタイトル更新・変更 |Issue:Edited:title  | issueのタイトル（更新・変更後の内容） |
 |  issueのクローズ | Issue:Closed |issueのタイトル  |
 |  issueの再オープン | Issue:Reopened |issueのタイトル  |
+
 上表において、「タイトル欄」及び「メッセージ欄」の配置に関しては、[Slack Notify - GitHub Action](https://github.com/marketplace/actions/slack-notify#environment-variables)を参照下さい。
 
 ### issue comment更新仕様
