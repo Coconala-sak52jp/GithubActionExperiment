@@ -1,5 +1,5 @@
 # github actionsを用いてissue/wiki更新をSlackとtodoistへ通知する
-あああ
+
 ## Slackへの通知
 ### Quick Start
 1. 対象とするgithubリポジトリ（以降、github-reposと呼ぶ）に`.github/workflows`（以降wfディレクトリと呼ぶ）を準備する。
@@ -7,16 +7,14 @@
 3. 宛先となるslackのワークスペース（以降、slack-wsと呼ぶ）を用意し、Incoming Webhookを登録する。
 4. Incoming Webhookの設定ページで、あて先となるチャンネルを設定する。次に、Webhook URLを記録しておく。最後に「設定を保存する」を押して、保存する。
 5. 再びgithub-reposへ戻り、シークレット変数を登録する。
-	1. 'Settings->Secret'をポイントする。
-	2. 'Add a new secret'をポイントし、`Name:SLACK_WEBHOOK`、`Value:Webhook URL（手順４．で記録したもの）`を設定する。
+   1. 'Settings->Secret'をポイントする。
+   2. 'Add a new secret'をポイントし、`Name:SLACK_WEBHOOK`、`Value:Webhook URL（手順４．で記録したもの）`を設定する。
 6.  `github-repos/.github/workflows/slack-notification.yml`を編集し、`SLACK_CHANNEL: github-actions-experiment`に、4. で設定したものと同じチャンネルを設定する。    
 	e.g.) `SLACK_CHANNEL: my-favorite-chnnel`   
 	＊＊ generalは接続時のパーミッションで跳ねられることがあるため注意 ＊＊
 7. github-reposで新しいissueをopenしてみて、下記のような通知がslackに届けば成功。
 
 ![enter image description here](https://photos.app.goo.gl/5jnriYLHG7amAp1TA)
-
-
 
 ### issue更新仕様
 githubのissueユースケース視点における通知のサポート範囲は、下記の通りです。
@@ -56,8 +54,9 @@ issue本体と同様にユースケース視点から見た通知のサポート
 | コメント削除 |Issue:comment:Deleted  |issueのタイトル   |
 | コメントの変更・更新 |Issue:comment:Edited  | issueのタイトル|
 
-
 ### wiki更新仕様
+wiki更新に関し、ユースケース視点での通知サポート範囲は下記の通りです。
++ aaa
 
 ### カスタマイズ
 
